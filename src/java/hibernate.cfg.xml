@@ -8,6 +8,6 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Geeth@200104</property>
     <property name="hibernate.show_sql">true</property>
-  
+   <mapping class="hibernate.User"/>
   </session-factory>
 </hibernate-configuration>
