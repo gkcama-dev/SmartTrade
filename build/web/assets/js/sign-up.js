@@ -26,7 +26,7 @@ async function signUp() {
         header:{
             "Content-Type":"application/json"
         },
-        body: userJson
+       
       }
    );
 
