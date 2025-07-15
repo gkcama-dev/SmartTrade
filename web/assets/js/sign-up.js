@@ -25,9 +25,23 @@ async function signUp() {
         body:userJson,
         header:{
             "Content-Type":"application/json"
-        }
+        },
+        body: userJson
       }
    );
+
+   if (response.ok) { //success
+      const json = await response.json();
+      if(json.status){
+            window.location = "verify-account.html";// Redirect to another page
+      }else{ //when status is false
+           // custom message
+           const msg = document.getElementById("msg")
+              msg.innerHTML = json.message;
+      }
+   }else{
+        document.getElementById("message").innerHTML = "Registration failed. Please try again.";
+   }
 
 }
 
