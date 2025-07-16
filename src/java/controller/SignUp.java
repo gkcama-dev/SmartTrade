@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Mail;
 import model.Util;
 import org.hibernate.Criteria;
@@ -36,6 +37,7 @@ public class SignUp extends HttpServlet {
         String email = user.get("email").getAsString();
         String password = user.get("password").getAsString();
 
+        //response 
         JsonObject responseObject = new JsonObject();
         responseObject.addProperty("status", false);
 
@@ -47,6 +49,8 @@ public class SignUp extends HttpServlet {
             responseObject.addProperty("message", "Email can not be empty");
         } else if (!Util.isEmailValid(email)) {
             responseObject.addProperty("message", "Please enter a valid Email");
+        } else if(password.isEmpty()){   
+             responseObject.addProperty("message", "Password can not be empty");
         } else if (!Util.isPasswordValid(password)) {
             responseObject.addProperty("message", "The password must contains at least uppercase, lowercase,"
                     + "number, special character and to be minimum eight characters long!");
@@ -111,6 +115,12 @@ public class SignUp extends HttpServlet {
                     }
                 }).start();
                 
+                //create Session
+                HttpSession ses = request.getSession();
+                ses.setAttribute("email", email);
+                
+                
+                //response send
                 responseObject.addProperty("status", true);
                 responseObject.addProperty("message", "Registration success. Please check your email for the verification code");
                 
