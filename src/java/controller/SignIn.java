@@ -63,7 +63,7 @@ public class SignIn extends HttpServlet {
 
             if (c1.list().isEmpty()) {
                 responseObject.addProperty("message", "Invalid Details");
-                
+
             } else {
 
                 User u = (User) c1.list().get(0);
@@ -93,5 +93,7 @@ public class SignIn extends HttpServlet {
         response.getWriter().write(responseText);
 
     }
+
+   
 
 }
