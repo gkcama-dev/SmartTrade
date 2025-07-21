@@ -62,6 +62,8 @@ public class Product {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Product(){}
+    
     /**
      * @return the id
      */
