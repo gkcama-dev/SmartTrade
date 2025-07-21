@@ -56,7 +56,6 @@ public class LoadSingleProduct extends HttpServlet {
                     product.getUser().setId(-1);
                     product.getUser().setCreated_at(null);
 
-                    
                     //similer-products
                     Criteria c1 = s.createCriteria(Model.class);
                     c1.add(Restrictions.eq("brand", product.getModel().getBrand()));
@@ -67,9 +66,14 @@ public class LoadSingleProduct extends HttpServlet {
                     c2.add(Restrictions.ne("id", product.getId()));
                     c2.setMaxResults(6);
                     List<Product> productList = c2.list();
-                    
-                    
-                    
+
+                    for (Product pr : productList) {
+                        pr.getUser().setEmail(null);
+                        pr.getUser().setPassword(null);
+                        pr.getUser().setVerification(null);
+                        pr.getUser().setId(-1);
+                        pr.getUser().setCreated_at(null);
+                    }
 
                     responseObject.add("product", gson.toJsonTree(product));
                     responseObject.add("productList", gson.toJsonTree(productList));
